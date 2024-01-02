@@ -12,8 +12,9 @@ class PostController extends Controller
         //El archivo al que apunta etá en  publicaciones\resources\views\posts\index.blade.php
         return view('posts.index');
     }
-    public function store(){
-        //guardar
+    public function store(Request $request){
+        //guardar Retorna todo lo que te han enviado
+        return $request->all();
     }
 
     public function destroy(){
