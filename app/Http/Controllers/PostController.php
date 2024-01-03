@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -10,7 +11,9 @@ class PostController extends Controller
         //Buscar a una vista index que esté dentro de una carpeta que se llame post
         //view hará que valla a views y busque la carpeta post y dentro de ella el archivo index
         //El archivo al que apunta etá en  publicaciones\resources\views\posts\index.blade.php
-        return view('posts.index');
+        return view('posts.index', [
+            'posts'=>Post::latest()->paginate()
+        ]);
     }
     public function store(Request $request){
         //Validar si body está vacío o no
