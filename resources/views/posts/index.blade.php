@@ -9,6 +9,13 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
+               <!-- Si hay algo que mostrar a nivel de status muestra lo siguiente   -->
+                <x-auth-session-status class="mb-4" :status="session('status')" />
+                    <!-- Oswaldo -->
+                    <!-- Validation Errors -->
+                    <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                    <!-- Oswaldo -->
+                    
                     <!-- route('posts.store') apunta a la ruta posts.store que se encuenta en routes/web.php -->
                     <form action="{{ route('posts.store') }}" method="POST">
                         <!-- token de seguridad -->

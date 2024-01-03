@@ -13,8 +13,20 @@ class PostController extends Controller
         return view('posts.index');
     }
     public function store(Request $request){
-        //guardar Retorna todo lo que te han enviado
-        return $request->all();
+        //Validar si body está vacío o no
+        $request->validate([
+            'body' => 'required'
+        ]);
+        // Retorna todo lo que te han enviado si es que no hay errores en la validación
+        // return $request->all();
+        //Crea una publicación a partir de el usuario
+        //posts() es una referencia al modelo que definimos en app\Models\User.php\User.php 
+        // retorna solo el campo body de lo que se envió
+        $request->user()->posts()->create($request->only('body'));
+
+        //Redirecciona a la página anterior, que será el index
+        return back()->with('status', 'Publicación guardada con éxito!');
+
     }
 
     public function destroy(){
