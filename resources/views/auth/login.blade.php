@@ -1,10 +1,10 @@
 <x-guest-layout>
     <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+    <x-session-status class="mb-4" :status="session('status')" />
 
     <!-- Oswaldo -->
     <!-- Validation Errors -->
-    <x-auth-validation-errors class="mb-4" :errors="$errors" />
+    <x-validation-errors class="mb-4" :errors="$errors" />
     <!-- Oswaldo -->
 
     <form method="POST" action="{{ route('login') }}">

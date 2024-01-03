@@ -17,6 +17,12 @@ class PostController extends Controller
         $request->validate([
             'body' => 'required'
         ]);
+        //Helper para depurar errores
+        // dd($request->only('body'));
+        
+        //El helper también puede ser, la idea es cerear un array, son diferentes técnicas para llegar a un resultado
+        // dd(['body' => $request->body]);
+        
         // Retorna todo lo que te han enviado si es que no hay errores en la validación
         // return $request->all();
         //Crea una publicación a partir de el usuario
