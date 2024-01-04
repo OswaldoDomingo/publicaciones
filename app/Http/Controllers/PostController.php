@@ -42,11 +42,14 @@ class PostController extends Controller
         //Con Request $request, Post $post, se le está diciendo que el usuario que está intentando borrar sea el mismo que creó el post 
         //dd($request->user()->id);
 
-        if($request->user()->id !== $post->user_id){
-            //Si el usuario que está intentando borrar no es el mismo que creó el post, se aborta la operación con un error 403
-            // abort(403);
-            return back()->with('status', 'Esta publicación no es tuya, no la puedes borrar!');
-        }
+        // if($request->user()->id !== $post->user_id){
+        //     //Si el usuario que está intentando borrar no es el mismo que creó el post, se aborta la operación con un error 403
+        //     // abort(403);
+        //     return back()->with('status', 'Esta publicación no es tuya, no la puedes borrar!');
+        // }
+        //Con authorize se le está diciendo que el usuario que está intentando borrar sea el mismo que creó el post
+        //Si no es así, se aborta la operación con un error 403
+        $this->authorize('destroy-post', $post);
         //Borra el post que se le envía si es que el usuario que lo está borrando es el mismo que lo creó
         $post->delete();
         //Retorna a la página anterior con un mensaje de éxito
