@@ -47,11 +47,17 @@ class PostController extends Controller
         //     // abort(403);
         //     return back()->with('status', 'Esta publicación no es tuya, no la puedes borrar!');
         // }
+        
         //Con authorize se le está diciendo que el usuario que está intentando borrar sea el mismo que creó el post
         //Si no es así, se aborta la operación con un error 403
-        $this->authorize('destroy-post', $post);
+        // $this->authorize('destroy-post', $post);
+
+        //Se usa delete en vez de destroy-post ya que se está usando el método delete de la clase PostPolicy
+        $this->authorize('delete', $post);
+        
         //Borra el post que se le envía si es que el usuario que lo está borrando es el mismo que lo creó
         $post->delete();
+        
         //Retorna a la página anterior con un mensaje de éxito
         return back()->with('status', 'Publicación eliminada con éxito!');
         
