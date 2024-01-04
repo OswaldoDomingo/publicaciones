@@ -1,16 +1,13 @@
+//Recorrer con foreach los posts que se envían desde el controlador
 @foreach($posts as $post)
     <div class="mt-4">
-        <a href="#" class="text-lg font-semibold" >{{ $post->user->name }}</a>
-        <p class="mt-1 text-xs">
-            <em>
-                {{ $post->created_at->format('d/m/Y') }}
-            </em>
-            {{ $post->body }}
-        </p>
+        //Incluir el archivo item.blade.php
+        @include('posts.inc.item')
     </div>
 
 @endforeach
 
 <div class="mt-4" >
+    //Incluir el archivo pagination.blade.php
     {{ $posts->links()}}
 </div>

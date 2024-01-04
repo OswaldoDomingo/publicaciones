@@ -33,12 +33,16 @@ class PostController extends Controller
         // retorna solo el campo body de lo que se envió
         $request->user()->posts()->create($request->only('body'));
 
-        //Redirecciona a la página anterior, que será el index
+        //Redirecciona a la página anterior, que será el index e imprimirá el mensaje de éxito
         return back()->with('status', 'Publicación guardada con éxito!');
 
     }
 
-    public function destroy(){
+    public function destroy(Post $post){
+        //Boprra el post que se le envía
+        $post->delete();
+        //Retorna a la página anterior con un mensaje de éxito
+        return back()->with('status', 'Publicación eliminada con éxito!');
         
     }
 }
