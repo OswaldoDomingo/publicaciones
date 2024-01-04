@@ -33,13 +33,21 @@ class PostController extends Controller
         // retorna solo el campo body de lo que se envió
         $request->user()->posts()->create($request->only('body'));
 
-        //Redirecciona a la página anterior, que será el index e imprimirá el mensaje de éxito
+        // Redirecciona a la página anterior, que será el index e imprimirá el mensaje de éxito
         return back()->with('status', 'Publicación guardada con éxito!');
 
     }
 
-    public function destroy(Post $post){
-        //Boprra el post que se le envía
+    public function destroy(Request $request, Post $post){
+        //Con Request $request, Post $post, se le está diciendo que el usuario que está intentando borrar sea el mismo que creó el post 
+        //dd($request->user()->id);
+
+        if($request->user()->id !== $post->user_id){
+            //Si el usuario que está intentando borrar no es el mismo que creó el post, se aborta la operación con un error 403
+            // abort(403);
+            return back()->with('status', 'Esta publicación no es tuya, no la puedes borrar!');
+        }
+        //Borra el post que se le envía si es que el usuario que lo está borrando es el mismo que lo creó
         $post->delete();
         //Retorna a la página anterior con un mensaje de éxito
         return back()->with('status', 'Publicación eliminada con éxito!');
