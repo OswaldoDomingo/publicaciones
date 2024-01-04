@@ -1,10 +1,14 @@
-<a href="#" class="text-lg font-semibold">{{ $post->user->name }}</a>
+<a href="{{ route('users.show', $post->user->id) }}" class="text-lg font-semibold">
+    {{ $post->user->name }}
+</a>
+
 <p class="mt-1 text-xs">
     <em>
         {{ $post->created_at->format('d/m/Y') }}
     </em>
     {{ $post->body }}
 </p>
+
 <!-- //Cada vez que se muestre un post, se va a verificar si el usuario que está viendo el post es el mismo que lo creó
 //Si es así, se mostrará el botón de borrar y si no, no se mostrará -->
 <!-- @ can ('destroy-post', $post) -->
